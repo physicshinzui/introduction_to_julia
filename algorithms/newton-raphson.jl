@@ -78,9 +78,9 @@ end
 plot(errors, xlabel="No. of Iteration", ylabel="ϵ", label="", linewidth=3)
 
 # ╔═╡ Cell order:
-# ╠═83617fec-9cd9-48b1-84f8-12fb68dfa9ce
+# ╟─83617fec-9cd9-48b1-84f8-12fb68dfa9ce
 # ╠═c305f2ce-44e4-4eab-9833-a40c9d93767f
-# ╠═c52a042d-e1bc-45a3-8d10-7a72f53910bf
+# ╟─c52a042d-e1bc-45a3-8d10-7a72f53910bf
 # ╠═1d9f47d8-cf82-46f1-adf2-1c4edd18c5ce
 # ╠═ec39b2ac-dcf1-4110-916f-5a7f96d0520a
 # ╠═c2715eea-0f94-470b-84f1-6b8d1234d2ee
