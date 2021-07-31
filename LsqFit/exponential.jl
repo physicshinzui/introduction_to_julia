@@ -58,7 +58,7 @@ ys_fit = model(xs, params)
 
 # ╔═╡ a9f76a9f-572c-40c9-88f3-dd2bb52efbae
 begin
-plot(xs, ys, seriestype=:scatter, label="Data")
+plot(xs, ys, seriestype=:scatter, label="Data", markersize=2)
 plot!(xs, ys_fit, lw = 3, label="fit")
 end
 
@@ -66,7 +66,7 @@ end
 # ╠═2d5cc2d6-defc-11eb-02d4-eb630a129828
 # ╟─8052bcfe-a45d-4b56-977b-f4b50141e145
 # ╠═4dec5089-2cdc-4a6a-912c-13a154dad9fa
-# ╟─5e55162c-bd68-4a79-aa0e-69c8feeaeb4d
+# ╠═5e55162c-bd68-4a79-aa0e-69c8feeaeb4d
 # ╠═228faed9-ebc4-41d8-a079-a58e922df93a
 # ╠═927a576b-4624-49f6-ae75-a4f656079263
 # ╠═79a20477-4650-4638-b01d-f03353eb227d
