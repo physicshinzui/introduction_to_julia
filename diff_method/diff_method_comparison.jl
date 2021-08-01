@@ -14,10 +14,7 @@ macro bind(def, element)
 end
 
 # ╔═╡ 1467e1b4-89f8-4084-9567-3a4d5bbe5655
-begin 
-	using Plots
-	using PlutoUI
-end
+using Plots, PlutoUI
 
 # ╔═╡ 54fa6854-d80b-11eb-0668-61deb4905f8a
 md"# Euler Method: A difference method for a differential equation."
@@ -198,13 +195,13 @@ end
 
 
 # ╔═╡ Cell order:
-# ╠═54fa6854-d80b-11eb-0668-61deb4905f8a
+# ╟─54fa6854-d80b-11eb-0668-61deb4905f8a
 # ╠═1467e1b4-89f8-4084-9567-3a4d5bbe5655
 # ╟─d90aa1c9-5073-490d-8ccc-4b04a8b07236
 # ╟─5040d8cd-6807-495c-8a0c-5ca71bf81a54
-# ╟─f6217cad-424b-4492-94a8-dbbe104b29c7
+# ╠═f6217cad-424b-4492-94a8-dbbe104b29c7
 # ╟─c9d6d933-88f8-4dea-a5d8-9a752ccda3e5
-# ╠═88b216aa-3928-4658-b8e8-20e8cdfc50a1
+# ╟─88b216aa-3928-4658-b8e8-20e8cdfc50a1
 # ╟─7f7b69c8-4fc6-4494-8f02-12dfabe719f3
 # ╟─1105db00-91bd-4a85-9893-d5abb1271123
 # ╠═f1cc3381-dde0-49c4-8649-4b4a46d764d2

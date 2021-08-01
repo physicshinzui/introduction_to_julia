@@ -1,7 +1,4 @@
 # Introduction to Julia
 
-## Table of Contents
-- Linear algebra
-- Difference method
+色々なライブラリを試しては，そのノートブックを共有します．
 
-etc.
