@@ -9,15 +9,11 @@ using Plots, PlutoUI, LsqFit, Pkg
 
 # ╔═╡ f47b54f6-f0cf-11eb-35e2-e129cd78014e
 md"""
-# Juliaでデータフィッティング
-Written by なつれ
+# Fitting with Julia
+Written by Shinji Iida
 
-参考文献
-- https://github.com/JuliaNLSolvers/LsqFit.jl
+
 """
-
-# ╔═╡ acfd4f7e-6a21-4b22-96f2-182471b33734
-md"## 使用するパッケージのバージョンを確認"
 
 # ╔═╡ 8c10e197-2736-4cbb-a762-baeb2a7afc69
 with_terminal() do 
@@ -25,39 +21,53 @@ with_terminal() do
 	Pkg.status(["Plots","LsqFit","PlutoUI", "Pkg"]) 
 end
 
+# ╔═╡ ee1e2557-169f-409c-bce8-94b10c6a0d52
+TableOfContents()
+
 # ╔═╡ 9f6ba259-7ac4-4ea8-b4a4-91e16f985640
-md"## 1. データの生成"
+md"## 1. Exponential Fitting"
+
+# ╔═╡ 5a0ff55a-0b24-44f0-9264-c3c5b69474c4
+begin 
+	expmodel(x, p) = p[1] * exp.(p[2] * x)
+	xs = 0:0.1:10
+	data1 = expmodel(xs, [10,-1]) + rand(length(xs))
+	plot(xs, data1, label = "Raw")
+
+	p0 = [0.5, 0.5]
+	fit = curve_fit(expmodel, xs, data1, p0)
+	y_pred = expmodel(xs, fit.param)
+	plot!(xs, y_pred, label = "Model")
+end
+
+# ╔═╡ 82b36a6a-0e15-4a39-9b06-08f1bb101da8
+md"## 2. Sin curve fitting"
 
 # ╔═╡ 21778339-2f51-4b92-8926-bc4dcf648c41
 begin
-xdata = [xi for xi in 0:0.1:4π]
-ydata = sin.(xdata) .+ rand(length(xdata)) #乱数のノイズをのせる
-plot(xdata, ydata)
+	sin_model(x, p) = p[1] * sin.(p[2]*x) 
+	xdata = [xi for xi in 0:0.1:4π]
+	ydata = sin_model(xdata, [1,1]) .+ rand(length(xdata)) #noise
+	plot(xdata, ydata)
+	
+	sinfit = curve_fit(sin_model, xdata, ydata, p0)
+	sin_pred = sin_model(xdata, sinfit.param)
+	plot!(xdata, sin_pred)
 end
 
-# ╔═╡ ac630d6d-51ab-4136-ac06-40eb44ae5bff
-md"## 2. fittingに使う関数を定義する"
-
-# ╔═╡ 23e7d2e5-ecc1-474a-9017-dd13924de2d2
-@. model(x) = p[1] * sin(x*p[2])
-
-# ╔═╡ e898cfec-9f4d-4184-9cfa-1e932ee484c8
-begin
-params = [0.5, 0.5]
-fit =curve_fit(model, xdata, ydata, params)
-end
-
-# ╔═╡ 6149f535-2866-452f-820a-f42095c8399a
-
+# ╔═╡ 7400fa63-b012-4da6-95b3-1f0099eed877
+md"""
+## References
+- https://github.com/JuliaNLSolvers/LsqFit.jl
+"""
 
 # ╔═╡ Cell order:
 # ╠═f47b54f6-f0cf-11eb-35e2-e129cd78014e
 # ╠═df347384-73ad-48c1-848c-8adf42c99b54
-# ╠═acfd4f7e-6a21-4b22-96f2-182471b33734
 # ╠═8c10e197-2736-4cbb-a762-baeb2a7afc69
+# ╠═ee1e2557-169f-409c-bce8-94b10c6a0d52
 # ╠═9f6ba259-7ac4-4ea8-b4a4-91e16f985640
+# ╠═5a0ff55a-0b24-44f0-9264-c3c5b69474c4
+# ╠═82b36a6a-0e15-4a39-9b06-08f1bb101da8
 # ╠═21778339-2f51-4b92-8926-bc4dcf648c41
-# ╠═ac630d6d-51ab-4136-ac06-40eb44ae5bff
-# ╠═23e7d2e5-ecc1-474a-9017-dd13924de2d2
-# ╠═e898cfec-9f4d-4184-9cfa-1e932ee484c8
-# ╠═6149f535-2866-452f-820a-f42095c8399a
+# ╠═7400fa63-b012-4da6-95b3-1f0099eed877
