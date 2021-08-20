@@ -1,0 +1,4 @@
+┌ Info: a context specific log message
+└ @ Main In[5]:5
+┌ Info: a global log message
+└ @ Main In[5]:9
