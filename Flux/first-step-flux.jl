@@ -34,7 +34,6 @@ begin
 	using Flux: onehotbatch #  batch (matrix) of one-hot vectors
 	using MLDatasets: MNIST
 	using Plots
-	using CUDA: device
 end
 
 # ╔═╡ 937b2892-046c-11ec-38f6-7b359f56c76e
@@ -187,7 +186,7 @@ begin
 	imgsize=(28,28,1)
 	nclasses=10
 	model = Chain( Dense(prod(imgsize), 32, relu), 
-		           Dense(32, nclasses)
+		           Dense(32, nclasses), softmax
 				 )
 end
 
@@ -221,9 +220,9 @@ md"""
 
 # ╔═╡ 97927f76-03d3-4e58-a84b-f29cc5a7e72d
 begin
-	epochs = 500
-	loss_values = zeros(epochs)
-	#acc_train = zeros(epochs)
+	epochs = 20
+	loss_train = zeros(epochs)
+	acc_test = zeros(epochs)
 end
 
 # ╔═╡ 9d510a57-c293-4cdc-881e-87a30579898f
@@ -235,19 +234,24 @@ for epoch in 1:epochs
 	# Report on train and test
 	train_loss, train_acc = loss_and_accuracy(train_loader, model)
 	test_loss, test_acc   = loss_and_accuracy(test_loader, model)
-	loss_values[epoch] = train_loss
+	loss_train[epoch] = train_loss
+	acc_test[epoch]  = test_acc
 	#@show epoch
 	#println("  train_loss = $train_loss, train_accuracy = $train_acc")
 	#println("  test_loss = $test_loss, test_accuracy = $test_acc")
 end
 
 # ╔═╡ 4138f612-4fba-4bf7-9ebb-4811d921184d
-plot(loss_values)
+begin
+	p1 = plot(loss_train, label=nothing, title="Loss function")
+	p2 = plot(acc_test, label=nothing, title="Test accuracy")
+	plot(p1,p2)
+end
 
 # ╔═╡ 6332dbc4-d35b-416c-bd36-29dc11e33573
 md"""
 ## Prediction
-$(@bind idata PlutoUI.Slider(1:10))
+$(@bind idata PlutoUI.Slider(1:100))
 """
 
 # ╔═╡ 2b2688c4-335c-42ab-849c-6ac33b794570
@@ -260,6 +264,7 @@ begin
 		xtickfontsize=15, ytickfontsize=15)
 	xticks!(0:1:9)
 	xlabel!("Numbers")
+	ylims!(0,1)
 end
 
 # ╔═╡ 155c6c4b-d08a-404b-afba-1ef8408773ca
